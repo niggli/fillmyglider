@@ -26,24 +26,24 @@ enum state_enum
 
 /* Constants and constand variables ****************************/
 
-const int PIN_OUT_PUMP1    = 4;
-const int PIN_OUT_PUMP2    = 5;
-const int PIN_OUT_LED      = 6;
-const int PIN_OUT_BUZZER   = 7;
-const int PIN_IN_FLOWMETER = 2;   /* only pins 2 and 3 are external interrupts */
-const int PIN_IN_STARTSTOP = 3;
-const int PIN_IN_PUMP1     = 8;
-const int PIN_IN_PUMP2     = 9;
+const byte PIN_OUT_PUMP1    = 4;
+const byte PIN_OUT_PUMP2    = 5;
+const byte PIN_OUT_LED      = 6;
+const byte PIN_OUT_BUZZER   = 7;
+const byte PIN_IN_FLOWMETER = 2;   /* only pins 2 and 3 are external interrupts */
+const byte PIN_IN_STARTSTOP = 3;
+const byte PIN_IN_PUMP1     = 8;
+const byte PIN_IN_PUMP2     = 9;
 
-const int MORSE_DI                   = 50;
-const int MORSE_DAH                  = 150;
+const unsigned int MORSE_DI                   = 50;
+const unsigned int MORSE_DAH                  = 150;
 const unsigned long MORSE_BFO        = 800;
 
 const unsigned long DEBOUNCE_TIME    = 400L;
 
-const int PULSES_PER_LITER = 450;
+const unsigned int PULSES_PER_LITER = 450;
 
-const int MAX_NO_CHANGE_SECONDS = 5;
+const unsigned int MAX_NO_CHANGE_SECONDS = 5;
 
 const boolean DEBUG        = true;
 
@@ -86,8 +86,8 @@ void setup()
 
 void loop()
 {
-  int liters;
-  int temp;
+  unsigned int liters;
+  unsigned int temp;
   static int liters_before;
   static unsigned long impulses_before;
   static unsigned long millis_last_flow;
