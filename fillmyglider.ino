@@ -24,7 +24,7 @@ enum state_enum
   STATE_FINISHING
 };
 
-/* Constants and constand variables ****************************/
+/* Constants and constant variables ****************************/
 
 const byte PIN_OUT_PUMP1    = 4;
 const byte PIN_OUT_PUMP2    = 5;
@@ -35,13 +35,13 @@ const byte PIN_IN_STARTSTOP = 3;
 const byte PIN_IN_PUMP1     = 8;
 const byte PIN_IN_PUMP2     = 9;
 
-const unsigned int MORSE_DI                   = 50;
-const unsigned int MORSE_DAH                  = 150;
-const unsigned long MORSE_BFO        = 800;
+const unsigned int MORSE_DI              = 50;
+const unsigned int MORSE_DAH             = 150;
+const unsigned long MORSE_BFO            = 800;
 
-const unsigned long DEBOUNCE_TIME    = 400L;
+const unsigned long DEBOUNCE_TIME        = 400L;
 
-const unsigned int PULSES_PER_LITER = 450;
+const unsigned int PULSES_PER_LITER      = 450;
 
 const unsigned int MAX_NO_CHANGE_SECONDS = 5;
 
@@ -72,6 +72,9 @@ void setup()
   pinMode(PIN_IN_STARTSTOP, INPUT_PULLUP);
   pinMode(PIN_IN_PUMP1, INPUT_PULLUP);
   pinMode(PIN_IN_PUMP2, INPUT_PULLUP);
+
+  digitalWrite(PIN_OUT_PUMP1, 1);
+  digitalWrite(PIN_OUT_PUMP2, 1);
 
   attachInterrupt(digitalPinToInterrupt(PIN_IN_STARTSTOP), i_startstop, FALLING);
 
@@ -108,11 +111,11 @@ void loop()
         attachInterrupt(digitalPinToInterrupt(PIN_IN_FLOWMETER), i_flowcounter, RISING);
         if(digitalRead(PIN_IN_PUMP1))
         {
-          digitalWrite(PIN_OUT_PUMP1, 1);
+          digitalWrite(PIN_OUT_PUMP1, 0);
         }
         if(digitalRead(PIN_IN_PUMP2))
         {
-          digitalWrite(PIN_OUT_PUMP2, 1);
+          digitalWrite(PIN_OUT_PUMP2, 0);
         }
         tone(PIN_OUT_BUZZER, 1000, 300);
         if (DEBUG)
@@ -195,8 +198,8 @@ void loop()
     break;
 
     case STATE_FINISHING:
-      digitalWrite(PIN_OUT_PUMP1, 0);
-      digitalWrite(PIN_OUT_PUMP2, 0);
+      digitalWrite(PIN_OUT_PUMP1, 1);
+      digitalWrite(PIN_OUT_PUMP2, 1);
       delay(2000);
       detachInterrupt(digitalPinToInterrupt(PIN_IN_FLOWMETER));
       liters = impulses_to_liters(impulses);
